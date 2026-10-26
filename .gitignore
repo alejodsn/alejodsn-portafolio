@@ -1,0 +1,16 @@
+# Local snapshots are kept for recovery and are not part of the site.
+/backup-*/
+
+# Local Vercel project metadata and caches.
+/.vercel/
+
+# Secrets and machine-local configuration.
+.env
+.env.*
+!.env.example
+
+# Local dependency, cache, and operating-system files.
+/node_modules/
+*.log
+.DS_Store
+Thumbs.db
