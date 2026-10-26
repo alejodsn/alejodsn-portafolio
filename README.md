@@ -35,7 +35,7 @@ PDF.js es la única dependencia añadida; se sirve localmente y se carga solo al
 
 Los PDF de la galería se abren desde sus archivos originales en un visor vertical con navegación y zoom; las vistas WebP que ya existían se conservan como miniaturas. El visor multimedia reserva un área de altura estable, con miniaturas horizontales que se desplazan por separado.
 
-Los ocho videos permanecen en su formato original y suman cerca de 336 MB. Se guardan con Git LFS para superar el límite de archivo de GitHub sin comprimir el material. No se descargan en la cuadrícula: al faltar una portada apropiada, el navegador intenta extraer un fotograma al mostrar la tarjeta y usa una portada neutral rotulada si no puede. El video completo se solicita al seleccionarlo/reproducirlo.
+Los ocho videos permanecen en su formato original y suman cerca de 352 MB. Se guardan con Git LFS para superar el límite de archivo de GitHub sin comprimir el material. No se descargan en la cuadrícula: al faltar una portada apropiada, el navegador intenta extraer un fotograma al mostrar la tarjeta y usa una portada neutral rotulada si no puede. El video completo se solicita al seleccionarlo/reproducirlo.
 
 Al sumar recursos, conserva los originales, registra identificadores estables y vuelve a ejecutar:
 
@@ -58,6 +58,7 @@ La deduplicación compara hashes SHA-256 de contenido, sin descartar variantes v
 - Repositorio existente: https://github.com/alejodsn/alejodsn-portafolio
 - Sitio publicado: https://portafolio-alejodsn.vercel.app/
 - La sincronización inicial se prepara en la rama `codex/integracion-inicial`; no actualiza `main`.
-- Al subir una rama, la integración actual de Vercel puede generar una vista previa. La rama de producción y la disponibilidad de esa vista previa se verifican en Vercel; no se cambian desde este proyecto.
+- Vista previa actual: https://portafolio-git-codex-integracion-inicial-alejo-dsn.vercel.app/ (Vercel requiere iniciar sesión para verla).
+- El commit de esta rama recibió un estado exitoso de Vercel; la rama de producción configurada aún debe confirmarse en el panel del proyecto.
 - Los videos se guardan con Git LFS. Vercel debe tener habilitada la descarga de objetos LFS para que los reproductores reciban el video original en sus despliegues.
 

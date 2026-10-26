@@ -178,3 +178,24 @@ Estados: **Implementado y verificado**, **Implementado, no verificado**, **Pendi
 - `node scripts/validate-portfolio-media.cjs`: pasó; 19 proyectos, 64 piezas referenciadas, 8 videos y 5 PDF; recursos presentes y simulación de reimportación sin nuevas referencias.
 - `node --check assets/js/app.js`: pasó. El JavaScript no se modificó.
 - No se volvió a probar el PDF, conforme al alcance. No se probaron Safari, Firefox ni dispositivos físicos; la comprobación visual de esta corrección se hizo en el navegador local de escritorio.
+
+## Integración inicial con GitHub y Vercel (26 oct 2026)
+
+| Control | Estado | Evidencia |
+|---|---|---|
+| Integrar la carpeta local con el repositorio existente | Implementado y verificado | Se enlazó `https://github.com/alejodsn/alejodsn-portafolio`. El remoto se comparó antes de integrar: `main` tenía dos commits y solo `README.md` e `index.html`; el README remoto se conservó en la documentación local y el `index.html` provisional permanece en la historia de `main`. |
+| Mantener `main` sin cambios | Verificado | La sincronización usa `codex/integracion-inicial`; tras el push, `main` seguía en `eaaf488cd927f74380aafd18d69163071a443bbc`. El commit remoto de trabajo coincide con el local `b59093d731ca6d25467f8809d0ab00ae810ae38e`. |
+| Preservar los dos historiales | Implementado y verificado | `ea9ee71` importa el proyecto local; `b59093d` es el merge commit que incluye ambos commits de `main` como ancestros. No se reescribió historia ni se usó force push. |
+| Excluir respaldos y configuración local | Implementado y verificado | `.gitignore` omite `backup-*/`, `.vercel/`, `.env*`, cachés y dependencias locales. Los cuatro respaldos continúan en la carpeta de trabajo pero no están versionados. No se detectaron archivos `.env` ni claves por nombre en el inventario local. |
+| Gestionar videos grandes | Implementado y verificado | Git LFS está instalado (3.7.1), `.gitattributes` aplica LFS a `*.mp4`, ocho objetos se subieron (352 MB reportados por Git LFS) y `git lfs fsck` pasó. GitHub Free incluye 10 GiB de almacenamiento y transferencia LFS; no se comprobó el saldo actual de la cuenta. |
+| Autenticación local segura | Implementado y verificado | Git Credential Manager identificó la cuenta `alejodsn`. Este repositorio usa el almacén DPAPI cifrado; una excepción global `safe.directory` se limitó a esta carpeta exacta por la propiedad del `.git` de la cuenta aislada de Codex. No se instalaron GitHub CLI ni dependencias del portafolio. |
+| Vista previa automática | Implementado y verificado parcialmente | GitHub muestra el estado Vercel `success` para `b59093d`. Vista previa: `https://portafolio-git-codex-integracion-inicial-alejo-dsn.vercel.app/`; al consultarla sin sesión, responde con la pantalla de inicio de sesión de Vercel, por lo que no se verificó el contenido renderizado ni la reproducción de medios desde esa URL. |
+| Proyecto de producción y LFS en Vercel | Pendiente de comprobación | El dominio de producción respondió HTTP 200 con «Portafolio en Construcción», igual que el `index.html` de `main`, y el check Vercel de ese commit está en `success`. No se tuvo acceso de lectura al panel para confirmar la rama de producción ni si el proyecto tiene habilitada la descarga de objetos LFS. No se cambió ninguna configuración de Vercel. |
+
+### Comprobaciones de la integración
+
+- Git 2.53.0, Git LFS 3.7.1 y Git Credential Manager 2.7.3 disponibles en el entorno local. `gh` no está instalado ni se necesitó.
+- Push terminado en `origin/codex/integracion-inicial`; el branch local sigue el remoto, está limpio y `git ls-remote` confirmó el SHA remoto. `git lfs fsck` pasó sin objetos pendientes.
+- `node scripts/validate-portfolio-media.cjs`: pasó; 19 proyectos, 64 referencias, 8 videos, 5 PDF y rutas presentes. Seis comprobaciones `node --check` pasaron para aplicación, catálogo, manifiesto, scripts y servidor.
+- Servidor local en `http://127.0.0.1:8002/`: portada y `privacy.html` respondieron HTTP 200; el título de la portada coincide con el portafolio local.
+- La vista previa Vercel requiere acceso autenticado. Los despliegues de ramas no modifican producción; no se abrió un PR, no se fusionó a `main` y no se ejecutó un despliegue manual.
