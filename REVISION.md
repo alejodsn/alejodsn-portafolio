@@ -97,7 +97,7 @@ Estados: **Implementado y verificado**, **Implementado, no verificado**, **Pendi
 | Optimizar imágenes y páginas de PDF | Hecho | 70 vistas WebP (miniaturas y versiones completas) bajo `assets/img/extra/`; 34 corresponden a páginas de PDFs. |
 | Incorporar videos | Hecho, limitado | 8 videos usan reproductor nativo y `preload="none"`; las fuentes ocupan aproximadamente 336 MB y no fueron transcodificadas. |
 | Permiso para exhibir piezas y marcas | Pendiente de Alejandro | Revisar autorización de proyectos y marcas de clientes antes de cualquier publicación. |
-| Exposición de archivos fuente | Pendiente de decisión | `assets/img/subir/` es parte de la carpeta servida por la vista previa. Antes de publicación, decidir si se excluye o reorganiza para evitar entregar PDFs, imágenes y videos originales junto a las vistas optimizadas. |
+| Exposición de archivos fuente | Preparado en rama | Los originales de recepción se conservarán localmente y se excluirán del seguimiento futuro de Git. Los 8 videos y 5 PDF referenciados se sirven desde `assets/media/`; las 39 imágenes se sirven desde sus WebP en `assets/img/extra/`. Pendiente validar vista previa Vercel. |
 
 ## Supuestos y datos que requieren revisión
 
@@ -123,7 +123,7 @@ Estados: **Implementado y verificado**, **Implementado, no verificado**, **Pendi
 ### Resultados de validación reproducibles
 
 - `node scripts/validate-portfolio-media.cjs`: pasó. Proyectos 19; referencias antes/después de deduplicación por proyecto 64/64; duplicados de referencias suprimidos 0; reimportación simulada sin nuevas referencias; 8 videos y 5 PDF originales; rutas verificadas.
-- Los hashes se generaron para 179 archivos de medios. Se encontraron 37 grupos de archivos idénticos en disco, pero no había referencias duplicadas en las galerías; por eso se mantuvieron intactos los archivos.
+- El manifiesto actualizado contiene 140 archivos de medios fuera de `subir/` y registra 37 grupos de WebP idénticos con alias distintos en `assets/img/extra/full/`. No se eliminaron esos archivos ni se detectaron referencias de diapositiva duplicadas.
 - El servidor local permite cargar el módulo/worker PDF.js y los documentos. La solicitud parcial de video responde con soporte de rangos HTTP. Los PDF no se transformaron: se usan sus documentos de origen.
 - En escritorio se observaron páginas PDF renderizadas, controles, cambio de página y zoom; en el reproductor nativo se inició un video y se mostró contenido real. En móvil (ancho de 390 px) se comprobó la disposición apilada y el desplazamiento del documento.
 - Consola del navegador durante la revisión del visor: sin errores ni advertencias registrados.
@@ -133,10 +133,21 @@ Estados: **Implementado y verificado**, **Implementado, no verificado**, **Pendi
 
 - Confirmar derechos para exhibir piezas y marcas de clientes.
 - Los 8 videos originales ocupan aproximadamente 352 MB. Reducirlos/transcodificarlos si se publicarán y volver a comprobar su reproducción.
-- La carpeta `assets/img/subir/` conserva fuentes completas; revisar qué archivos se deben distribuir al elegir hosting.
+- Las fuentes de `assets/img/subir/` se conservan localmente; la rama contiene copias runtime necesarias en `assets/media/` y derivados WebP en `assets/img/extra/`.
 - El visor usa canvas para mostrar PDF; el texto de página no tiene capa seleccionable ni lectura accesible equivalente. El enlace al PDF original permanece disponible.
 - Confirmar que el hosting futuro sirva `.mjs`, `.wasm`, `.bcmap` y PDF con tipos MIME apropiados; el servidor local ya configura esos tipos. No se ha probado ningún despliegue.
 - Revisar contraste, accesibilidad manual completa, dominio/SEO absoluto, datos legales y prácticas reales del hosting antes de una publicación.
+
+## Preparación de la rama para publicación (26 oct 2026)
+
+| Comprobación | Estado | Evidencia |
+|---|---|---|
+| Mantener las fuentes de recepción localmente | Preparado | Los 52 archivos de `assets/img/subir/` permanecen en disco; la ruta se añadió a `.gitignore` y se retiró del índice de Git sin borrar archivos ni reescribir historial. |
+| Separar los recursos activos de la carpeta temporal | Implementado | Se copiaron 8 videos y 5 PDF a `assets/media/`; los 13 SHA-256 de destino coinciden con sus fuentes. Las referencias del visor y documentos ahora apuntan a `assets/media/`. |
+| Mantener las imágenes finales | Verificado localmente | Las galerías usan 39 versiones WebP completas y 39 miniaturas bajo `assets/img/extra/`; el validador confirma la existencia de todas las referencias. |
+| Comprobar entrega HTTP local | Verificado | Servidor en puerto 8010: 93 solicitudes HEAD para página, privacidad, 78 WebP y 13 medios respondieron 200. Los 8 videos respondieron 206 a solicitudes de rango de solo 1 KiB. |
+| Reproducción de video en Vercel | Pendiente | No se comprobó reproducción de los ocho videos en el despliegue; falta acceso a la vista previa protegida y confirmar la descarga LFS del proyecto. |
+| Preparar integración | Pendiente | Enviar cambios a `codex/integracion-inicial`, obtener vista previa y crear/actualizar PR hacia `main`; no fusionar ni publicar producción sin autorización. |
 
 ## Corrección puntual del carrusel de imágenes (26 oct 2026)
 

@@ -20,7 +20,8 @@ La dirección local es http://127.0.0.1:8001. Puedes cambiar `8001` por otro pue
 - `assets/js/app.js`: catálogo, filtros, galería, visor de imágenes/PDF/video, navegación y animación de habilidades.
 - `assets/img/`: portadas y piezas completas disponibles.
 - `assets/img/extra/`: miniaturas WebP para las galerías y las portadas de los documentos.
-- `assets/img/subir/`: archivos fuente incorporados; los originales se conservan.
+- `assets/img/subir/`: originales de recepción, conservados localmente e ignorados por Git.
+- `assets/media/`: copias versionadas de los PDF y videos que utiliza el sitio.
 - `assets/js/portfolio-additions.js`: fichas y orden de las nuevas piezas y colecciones.
 - `assets/js/media-hashes.js`: manifiesto SHA-256 para evitar referencias repetidas al mismo contenido.
 - `assets/vendor/pdfjs-6.3.289/`: visor PDF.js local, worker, mapas de caracteres, fuentes estándar, decodificadores y licencia Apache 2.0.
@@ -44,7 +45,7 @@ node scripts/generate-media-hashes.cjs
 node scripts/validate-portfolio-media.cjs
 ```
 
-La deduplicación compara hashes SHA-256 de contenido, sin descartar variantes visuales con contenido distinto. La carpeta `assets/img/subir/` conserva los archivos fuente originales y debe revisarse para excluir o reorganizar lo que no se deba distribuir antes de publicar.
+La deduplicación compara hashes SHA-256 de contenido, sin descartar variantes visuales con contenido distinto. El sitio presenta las imágenes desde WebP en `assets/img/extra/`; los videos y PDF activos se sirven desde `assets/media/`. `assets/img/subir/` conserva las fuentes locales y no se sincroniza con Git.
 
 ## Contenido que requiere confirmación antes de publicar
 

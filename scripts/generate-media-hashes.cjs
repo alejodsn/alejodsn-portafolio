@@ -3,7 +3,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 const root = path.resolve(__dirname, '..');
-const scanRoots = ['assets/img/full', 'assets/img/extra/full', 'assets/img/subir'];
+const scanRoots = ['assets/img/full', 'assets/img/extra/full', 'assets/media'];
 const supported = new Set(['.avif', '.gif', '.jpeg', '.jpg', '.mp4', '.pdf', '.png', '.webp']);
 const output = path.join(root, 'assets/js/media-hashes.js');
 

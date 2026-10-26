@@ -12,7 +12,7 @@ const videoFallbackPoster = label => {
   return `data:image/svg+xml,${encodeURIComponent(xml)}`;
 };
 const extraVideo = (source, posterKey, title, detail, format = 'Video') => ({
-  assetId: `video:${source.toLowerCase()}`, kind: 'video', src: encodeURI(`assets/img/subir/${source}`),
+  assetId: `video:${source.toLowerCase()}`, kind: 'video', src: encodeURI(`assets/media/${source}`),
   poster: posterKey ? `assets/img/extra/full/${posterKey}.webp` : videoFallbackPoster(title),
   thumb: posterKey ? `assets/img/extra/thumb/${posterKey}.webp` : videoFallbackPoster(title), posterFallback: !posterKey, title, detail, format, alt: title
 });
@@ -23,8 +23,8 @@ const extraPdf = (source, preview, title, detail, format = 'PDF · documento mul
 const EXTRA_PROJECTS = [
   {
     attachTo: 'brandbook',
-    docs: [{ label: 'Abrir el Brand Book completo en PDF', href: 'assets/img/subir/Brand-Book-Procinal_compressed.pdf' }],
-    slides: [extraPdf('assets/img/subir/Brand-Book-Procinal_compressed.pdf', 'pdf-brand-book-procinal-compressed-p01', 'Brand Book completo · 21 páginas', 'Documento original integrado en el visor; recorre sus páginas con desplazamiento vertical.', 'PDF · 21 páginas')],
+    docs: [{ label: 'Abrir el Brand Book completo en PDF', href: 'assets/media/Brand-Book-Procinal_compressed.pdf' }],
+    slides: [extraPdf('assets/media/Brand-Book-Procinal_compressed.pdf', 'pdf-brand-book-procinal-compressed-p01', 'Brand Book completo · 21 páginas', 'Documento original integrado en el visor; recorre sus páginas con desplazamiento vertical.', 'PDF · 21 páginas')],
     revisedTitle: 'Brand Book de Cinemas Procinal',
     revisedShort: 'Manual de identidad con lineamientos de tono, color, tipografía, fotografía y aplicaciones.'
   },
@@ -135,12 +135,12 @@ const EXTRA_PROJECTS = [
     type: 'Branding · Marca personal y evento', title: 'Daniela Buitrago · Identidad y Reinicia', short: 'Moodboard, sistema para redes y una identidad de evento.',
     q: 'Una marca personal y una experiencia con un mismo criterio visual.', fmt: 'Identidad, piezas sociales y póster', client: 'Daniela Buitrago', pal: ['#BDC7CF', '#131314', '#95835D', '#FFF6EB', '#525D6C'],
     s: [['La idea', 'Explorar la identidad personal y una propuesta visual para el evento Reinicia.'], ['Decisiones de diseño', 'El moodboard define una atmósfera editorial; el póster usa una fotografía central y una paleta de azul grisáceo, negro, dorado y marfil.'], ['Por qué funciona', 'Las piezas reúnen una dirección visual reconocible entre exploración de marca, redes y comunicación de evento.']],
-    docs: [{ label: 'Abrir identidad del evento Reinicia en PDF', href: 'assets/img/subir/marca-personal-Daniela-Buitrago/evento-reinicia/Identidad-evento-Reinicia.pdf' }],
+    docs: [{ label: 'Abrir identidad del evento Reinicia en PDF', href: 'assets/media/marca-personal-Daniela-Buitrago/evento-reinicia/Identidad-evento-Reinicia.pdf' }],
     slides: [
       extraImage('src-marca-personal-daniela-buitrago-moodboard-identidad-daniela-buitrago-png', 'Moodboard · Identidad personal', 'Tablero vertical de referencias para definir la atmósfera, el color y el lenguaje visual.', 'Moodboard'),
       extraImage('src-marca-personal-daniela-buitrago-feed-daniela-buitrago-png', 'Sistema para feed social', 'Composición de publicaciones que explora fotografía, titulares, frases y recursos gráficos en conjunto.', 'Feed social'),
       extraImage('src-marca-personal-daniela-buitrago-evento-reinicia-reinicia-poster-png', 'Reinicia · Póster', 'Póster vertical con retrato en silueta, tipografía editorial y paleta azul grisácea con acento dorado.', 'Póster · vertical'),
-      extraPdf('assets/img/subir/marca-personal-Daniela-Buitrago/evento-reinicia/Identidad-evento-Reinicia.pdf', 'pdf-identidad-evento-reinicia-p01', 'Reinicia · Documento de identidad', 'Documento original abierto dentro del visor del proyecto.', 'PDF · identidad de evento')
+      extraPdf('assets/media/marca-personal-Daniela-Buitrago/evento-reinicia/Identidad-evento-Reinicia.pdf', 'pdf-identidad-evento-reinicia-p01', 'Reinicia · Documento de identidad', 'Documento original abierto dentro del visor del proyecto.', 'PDF · identidad de evento')
     ]
   },
   {
@@ -149,12 +149,12 @@ const EXTRA_PROJECTS = [
     q: 'La experiencia de cine, organizada para descubrir y elegir.', fmt: 'Diseño web · escritorio y móvil', client: 'Cinemas Procinal', pal: ['#D71920', '#1B1532', '#F5F2EB', '#FFFFFF'],
     s: [['La idea', 'Organizar cartelera, novedades y acceso a la experiencia de cine en un sitio de marca.'], ['Decisiones de diseño', 'La propuesta combina un hero de campaña, navegación, módulos de películas y contenido promocional; se presentan las versiones de escritorio y móvil.'], ['Por qué funciona', 'Las dos vistas permiten revisar cómo cambia la jerarquía entre una página amplia y una pantalla larga para teléfono.']],
     docs: [
-      { label: 'Diseño de escritorio (PDF)', href: 'assets/img/subir/interfaz-web-procinal/interfaz-procinal-desktop.pdf' },
-      { label: 'Diseño móvil (PDF)', href: 'assets/img/subir/interfaz-web-procinal/interfaz-procinal-movil.pdf' }
+      { label: 'Diseño de escritorio (PDF)', href: 'assets/media/interfaz-web-procinal/interfaz-procinal-desktop.pdf' },
+      { label: 'Diseño móvil (PDF)', href: 'assets/media/interfaz-web-procinal/interfaz-procinal-movil.pdf' }
     ],
     slides: [
-      extraPdf('assets/img/subir/interfaz-web-procinal/interfaz-procinal-desktop.pdf', 'pdf-interfaz-procinal-desktop-p01', 'Interfaz · Escritorio', 'Documento original de la propuesta de escritorio. Desplázate por el diseño completo dentro del visor.', 'PDF · escritorio'),
-      extraPdf('assets/img/subir/interfaz-web-procinal/interfaz-procinal-movil.pdf', 'pdf-interfaz-procinal-movil-p01', 'Interfaz · Móvil', 'Documento original con la propuesta móvil completa; desplázate por sus secciones dentro del visor.', 'PDF · móvil')
+      extraPdf('assets/media/interfaz-web-procinal/interfaz-procinal-desktop.pdf', 'pdf-interfaz-procinal-desktop-p01', 'Interfaz · Escritorio', 'Documento original de la propuesta de escritorio. Desplázate por el diseño completo dentro del visor.', 'PDF · escritorio'),
+      extraPdf('assets/media/interfaz-web-procinal/interfaz-procinal-movil.pdf', 'pdf-interfaz-procinal-movil-p01', 'Interfaz · Móvil', 'Documento original con la propuesta móvil completa; desplázate por sus secciones dentro del visor.', 'PDF · móvil')
     ]
   },
   {
@@ -162,7 +162,7 @@ const EXTRA_PROJECTS = [
     type: 'Diseño editorial · Portafolio', title: 'Portafolio de servicios Fenix 2025', short: 'Presentación editorial de seguridad, tecnología y servicio especializado.',
     q: 'Tecnología y seguridad contadas desde las personas.', fmt: 'Documento editorial · 10 páginas', client: 'Fenix Seguridad Electrónica', pal: ['#BD171D', '#26272A', '#F4F1E9', '#6D7378'],
     s: [['La idea', 'Presentar servicios y sectores atendidos con un recorrido visual que combina tecnología, equipo y cobertura.'], ['Decisiones de diseño', 'Fotografía de instalaciones y personas, titulares breves, iconos y acentos rojos organizan la información por página.'], ['Por qué funciona', 'La secuencia alterna servicio, sector y equipo técnico para dar ritmo a una presentación corporativa.']],
-    docs: [{ label: 'Abrir Portafolio Fenix 2025 en PDF', href: 'assets/img/subir/portafolio-fenix-2025.pdf' }],
-    slides: [extraPdf('assets/img/subir/portafolio-fenix-2025.pdf', 'pdf-portafolio-fenix-2025-p01', 'Portafolio Fenix 2025 · 10 páginas', 'Documento original integrado al visor. Desplázate para recorrer la presentación completa.', 'PDF · 10 páginas')]
+    docs: [{ label: 'Abrir Portafolio Fenix 2025 en PDF', href: 'assets/media/portafolio-fenix-2025.pdf' }],
+    slides: [extraPdf('assets/media/portafolio-fenix-2025.pdf', 'pdf-portafolio-fenix-2025-p01', 'Portafolio Fenix 2025 · 10 páginas', 'Documento original integrado al visor. Desplázate para recorrer la presentación completa.', 'PDF · 10 páginas')]
   }
 ];
